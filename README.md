@@ -7,7 +7,7 @@ This tutorial will walk you through 3 basic steps involved in creating a recomme
 
 ## Data Wrangling:
 We can access the wiki dumps for all articles on this link: [Wikipedia dumps](https://meta.wikimedia.org/wiki/Data_dumps) 
-The link provides access to various wiki dumps right from the complete articles to just the article titles or abstracts. For the purpose of this project, we are interested the complete list of articles which have been partitioned into various folders. Let us look at how we would be extracting these dumps.
+The link provides access to various wiki dumps right from the complete articles to just the article titles or abstracts. For the purpose of this project, we are interested in the complete list of articles which have been partitioned into various folders. Let us look at how we would be extracting these dumps.
 
 One might think that this problem could be solved by parsing the Wikipedia web pages and extracting information individually from each of those pages. But this clearly isn’t an option which is feasible as our system would run into rate limits. Also, Wikipedia has millions of articles and to scrape each page individually is just taxing!
 
