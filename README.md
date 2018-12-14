@@ -13,7 +13,7 @@ One might think that this problem could be solved by parsing the Wikipedia web p
 
 Let us look at how we would programmatically parse through and extract the English language Wikipedia articles in an efficient way.
 We will first parse through [https://dumps.wikimedia.org/enwiki/](https://dumps.wikimedia.org/enwiki/) . We do this using BeautifulSoup to parse through HTML pages. We will be using dumps from September 2018 for our analysis.
-The most recent revision of every single article is available in a single compressed file as ‘pages-articles.xml.bz2’. However, we'll download the articles in smaller chunks so that we can then process them in parallel (which we'll see later). The total file size of these articles is 15GB when compressed. They are divided into 55 partitions and we will be downloading all of them.
+The most recent revision of every single article is available in a single compressed file as ‘pages-articles.xml.bz2’. However, we'll download the articles in smaller chunks so that we can then process them in parallel (which we'll see later). The total file size of these articles is 15GB when compressed. They are divided into 55 partitions and we will be downloading all of them using keras utilities. The default download directory of keras is /Keras/Datasets. To change this, I have manually added the file path on line number 48. You may do the same if you wish to change the path.
 
 Once we have downloaded the compressed files, we need to parse through them to extract the information we need. In our case, we need to extract all the articles which are related to 'Books'. To do this, we are using the following libraries:
 1. bz2 library: To parse through Bz2 files
@@ -21,8 +21,6 @@ Once we have downloaded the compressed files, we need to parse through them to e
 3. mwparserfromhell: This library is specifically for wikipedia dumps, it helps us parse through the articles and find the information we need using in-built functions.
 
 The contentHandler class in the SAX parser looks for content between a start tag and an end tag. We will be editting this contenthandler class to extract only the information we need. To do that, we are going to create a new function called "process_article" to extract title, properties, wikilinks, exlinks, timestamp, text_length. We will be editting the contenthandler class to provide us with just the information we need.
-
-[add image]
 
 Next, we will save all the books we found into JSON files. We will process each of these XML files in parallel using pooling to save time. This process took about 15 hours to process all the 55 partitions. The information is saved in 55 different JSON files.
 
